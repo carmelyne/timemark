@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Timemark</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #333;
+    }
+    .timestamp {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>⏳ Timemark</h1>
+  <p>This is a human-readable timestamp utility for when you need to remember a specific moment — like a meaningful start date.</p>
+
+  <div class="timestamp">
+    Start Time: <span id="start-time">2025-05-29 00:00 UTC</span>
+  </div>
+
+  <p id="elapsed"></p>
+
+  <script>
+    const startDate = new Date("2025-05-29T00:00:00Z");
+    const elapsedEl = document.getElementById("elapsed");
+
+    function updateElapsed() {
+      const now = new Date();
+      const diffMs = now - startDate;
+
+      const seconds = Math.floor(diffMs / 1000);
+      const minutes = Math.floor(seconds / 60);
+      const hours   = Math.floor(minutes / 60);
+      const days    = Math.floor(hours / 24);
+
+      elapsedEl.textContent = `Elapsed: ${days} days, ${hours % 24} hours, ${minutes % 60} minutes, ${seconds % 60} seconds`;
+    }
+
+    updateElapsed();
+    setInterval(updateElapsed, 1000);
+  </script>
+</body>
+</html>
